@@ -32,4 +32,21 @@ class Program
             Console.WriteLine("Nieznana operacja. Użyj -h, aby wyświetlić pomoc");
         }
     }//koniec Main
+
+    public static void Interpreter(string code) // metoda zaczytujaca kod, ktora tworzy tablice bytow na ktorej bedzie bedzie pracowal kod
+    {
+        const int MEMORY_SIZE = 30000; //ustala rozmiar dla pamieci 
+        byte[]memory = new byte[MEMORY_SIZE]; //tworzy wirtualna tasme 
+        int pointer = 0; //ustawia wskaznik na 1 pozycje tasmy
+        int codeindex = 0; //ustawia poczatkowa pozycje wskaznika dla zaczytanego kodu
+
+        while (codeindex < code.Length) //petla czytajaca kod
+        {
+            switch (code[codeindex])
+            {
+                
+            }
+            codeindex++;
+        } //koniec petli 
+    }
 }//koniec Programu
