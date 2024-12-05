@@ -21,6 +21,8 @@ class Program
             {
                 string code = File.ReadAllText(input);
                 Console.WriteLine(code);
+                Interpreter(code);
+                Console.WriteLine();
             }
             else//jezeli nie moze odnalezc pliku
             {
@@ -42,11 +44,28 @@ class Program
 
         while (codeindex < code.Length) //petla czytajaca kod
         {
-            switch (code[codeindex])
+            switch (code[codeindex]) //operuje na memory na podstawie znakow z kodu na wejsciu
             {
-                
+                case '>': //przesowa wskaznik na tasmie w prawo
+                    pointer = pointer + 1;
+                    break;
+                case '<': //przesowa wskaznik na tasmie w lewo
+                    pointer = pointer - 1;
+                    break;
+                case '+': //zwieksza wartosc dla komorki wskazanej przez wskaznik
+                    memory[pointer] ++;
+                    break;
+                case '-': //zmniejsza wartosc dla komorki 
+                    memory[pointer] --;
+                    break;
+                case '.': //odczytuje wartosc komorki wypisujac ja na ekran w formie znaku z tablicy ascii
+                    Console.Write((char)memory[pointer]);
+                    break;
+                case ',': //wczytuje wartosc komorki 
+                    memory[pointer] = (byte)Console.Read();
+                    break;
             }
-            codeindex++;
+            codeindex++; //nastepny znak z wejscia
         } //koniec petli 
-    }
+    }//koniec metody interpreter
 }//koniec Programu
