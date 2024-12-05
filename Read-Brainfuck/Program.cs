@@ -53,16 +53,18 @@ class Program
                     pointer = pointer - 1;
                     break;
                 case '+': //zwieksza wartosc dla komorki wskazanej przez wskaznik
-                    memory[pointer] ++;
+                    memory[pointer]++;
                     break;
                 case '-': //zmniejsza wartosc dla komorki 
-                    memory[pointer] --;
+                    memory[pointer]--;
                     break;
                 case '.': //odczytuje wartosc komorki wypisujac ja na ekran w formie znaku z tablicy ascii
                     Console.Write((char)memory[pointer]);
                     break;
                 case ',': //wczytuje wartosc komorki 
                     memory[pointer] = (byte)Console.Read();
+                    break;
+                default:
                     break;
             }
             codeindex++; //nastepny znak z wejscia
