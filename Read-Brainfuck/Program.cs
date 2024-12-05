@@ -20,7 +20,7 @@ class Program
             if (File.Exists(input)) //sprawdza czy podano poprawnie, jesli tak wczytuje zawartosc pliku do zmiennej code
             {
                 string code = File.ReadAllText(input);
-                Console.WriteLine(code);
+                // test 1: Console.WriteLine(code);
                 Interpreter(code);
                 Console.WriteLine();
             }
@@ -37,10 +37,10 @@ class Program
 
     public static void Interpreter(string code) // metoda zaczytujaca kod, ktora tworzy tablice bytow na ktorej bedzie bedzie pracowal kod
     {
-        const int MEMORY_SIZE = 30000; //ustala rozmiar dla pamieci 
-        byte[]memory = new byte[MEMORY_SIZE]; //tworzy wirtualna tasme pamieci
+        const int memorySize = 30000; //ustala rozmiar dla pamieci 
+        byte[]memory = new byte[memorySize]; //tworzy wirtualna tasme pamieci
         int pointer = 0; //ustawia wskaznik na 1 pozycje tasmy
-        int codeindex = 0; //ustawia poczatkowa pozycje wskaznika dla zaczytanego kodu na pierwszy znak
+        int codeindex = 0; //ustawia poczatkowa pozycje wskaznika dla kodu z pliku na pierwszy znak
 
         while (codeindex < code.Length) //petla czytajaca kod
         {
@@ -64,25 +64,44 @@ class Program
                 case ',': //wczytuje wartosc komorki 
                     memory[pointer] = (byte)Console.Read();
                     break;
-                case '[':
-                {
-                    
-                }
+                case '[': //sprawdza wartosc komorki czy = 0 jesli tak szuka konca petli w kodzie do ktorego skacze
+                    if (memory[pointer] == 0)
+                    {
+                        int endloop = FindBrackets(code, codeindex);
+                        if (endloop == -1)
+                            Console.WriteLine("Nie mozna odnalezc konca");
+                        codeindex = endloop;
+                    }
                     break;
-                case ']':
-                {
-                    
-                }
+                case ']': //sprawdza wartosc komorki czy > 0 jesli tak szuka poczatku petli do ktorego przeskakuje
+                    if (memory[pointer] > 0)
+                    {
+                        int startloop = FindBrackets(code, codeindex, true);
+                        if (startloop == -1)
+                            Console.WriteLine("Nie mozna odnalezc poczatku");
+                        codeindex = startloop -1;
+                    }
                     break;
                 default:
                     break;
             }
             codeindex++; //nastepny znak z wejscia
         } //koniec petli 
-    }//koniec metody interpreter
+    } //koniec metody interpreter
 
-    public int FindBracket() //szukanie krancow petli
+    public static int FindBrackets(string code, int codeindex, bool reverse = false) //metoda szukania krancow petli i zagniezdzen
     {
-        return 0;
-    }
-}//koniec Programu
+        int direction = reverse ? -1 : 1; //przeszukuje w prawo lub lewo w zaleznosci od warunku 
+        int nest = 1; //1 poziom bo otwiera petle
+        for (int i = codeindex + direction; i >= 0 && i < code.Length; i += direction)
+        {
+            if (code[i] == '[')
+                nest += reverse ? -1 : 1;
+            if (code[i] == ']')
+                nest += reverse ? 1 : -1;
+            if (nest == 0)
+                return i;
+        }
+        return -1;
+    } //koniec metody
+} //koniec Programu
