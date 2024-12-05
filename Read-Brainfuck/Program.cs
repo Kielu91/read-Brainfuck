@@ -38,9 +38,9 @@ class Program
     public static void Interpreter(string code) // metoda zaczytujaca kod, ktora tworzy tablice bytow na ktorej bedzie bedzie pracowal kod
     {
         const int MEMORY_SIZE = 30000; //ustala rozmiar dla pamieci 
-        byte[]memory = new byte[MEMORY_SIZE]; //tworzy wirtualna tasme 
+        byte[]memory = new byte[MEMORY_SIZE]; //tworzy wirtualna tasme pamieci
         int pointer = 0; //ustawia wskaznik na 1 pozycje tasmy
-        int codeindex = 0; //ustawia poczatkowa pozycje wskaznika dla zaczytanego kodu
+        int codeindex = 0; //ustawia poczatkowa pozycje wskaznika dla zaczytanego kodu na pierwszy znak
 
         while (codeindex < code.Length) //petla czytajaca kod
         {
@@ -64,10 +64,25 @@ class Program
                 case ',': //wczytuje wartosc komorki 
                     memory[pointer] = (byte)Console.Read();
                     break;
+                case '[':
+                {
+                    
+                }
+                    break;
+                case ']':
+                {
+                    
+                }
+                    break;
                 default:
                     break;
             }
             codeindex++; //nastepny znak z wejscia
         } //koniec petli 
     }//koniec metody interpreter
+
+    public int FindBracket() //szukanie krancow petli
+    {
+        return 0;
+    }
 }//koniec Programu
