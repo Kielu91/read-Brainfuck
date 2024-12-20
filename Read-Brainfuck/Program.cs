@@ -2,16 +2,16 @@
 
 class Program
 {
-    static void Main(string[] args) //metoda Main obslugujaca wywolania argumetow
+    static void Main(string[] args) //metoda main 
     {
         
-        if (args.Length == 1 && args[0] == "-h") //help i info argument -h
+        if (args.Length == 1 && args[0] == "-h") //informacje argument -h
         {
-            Console.WriteLine("\n     Łukasz Kielczyk\n");
-            Console.WriteLine(" Read-Brainfuck: program interpretujący język źródłowy brainfuck\n" +
-                              "\n-p <scieżka>   Aby odczytac informacje zapisane w pliku z kodem bf nalezy uruchamiając program\n" +
-                              "     dopisac argument -p <scieżka> gdzie scieżka odpowiada lokalizacji pliku który chcemy otworzyc");
-            Console.WriteLine("\nprzykład:\n Read-Brainfuck.exe -p \" C:\\Users\\user\\Desktop\\plik.bf\"");
+            Console.WriteLine("\n  author : Łukasz Kielczyk\n");
+            Console.WriteLine(" Read-Brainfuck: A program that interprets the Brainfuck source language\n" +
+                              "\nTo read information stored in file as BF code, start the program\n" +
+                              "     adding an argument -p <path>, where the path corresponds to the location of the file you want to interpret");
+            Console.WriteLine("\nexample:\n Read-Brainfuck -p C:\\Users\\user\\Desktop\\file.bf");
         }
         else
         if (args.Length == 2 && args[0] == "-p") //reakcja na argument -p <sciezka pliku>
@@ -26,12 +26,12 @@ class Program
             }
             else//jezeli nie moze odnalezc pliku
             {
-                Console.WriteLine($"Nie mozna odnalezc '{input}' \n plik nie istnieje lub podano nieprawidlowa scieżke");
+                Console.WriteLine($"Cannot find '{input}' \n the file doesn't exist or the path is invalid");
             }
         }
         else// reakcja na nieprawidlowe uruchomienie programu
         {
-            Console.WriteLine("Nieznana operacja. Użyj -h, aby wyświetlić pomoc");
+            Console.WriteLine("Unknown operation. Use the -h argument to display more information");
         }
     }//koniec Main
 
@@ -69,7 +69,7 @@ class Program
                     {
                         int endloop = FindBrackets(code, codeindex);
                         if (endloop == -1)
-                            Console.WriteLine("Nie mozna odnalezc konca");
+                            Console.WriteLine("Can't find the end of loop");
                         codeindex = endloop;
                     }
                     break;
@@ -78,7 +78,7 @@ class Program
                     {
                         int startloop = FindBrackets(code, codeindex, true);
                         if (startloop == -1)
-                            Console.WriteLine("Nie mozna odnalezc poczatku");
+                            Console.WriteLine("Can't find the beginning of loop");
                         codeindex = startloop -1;
                     }
                     break;
