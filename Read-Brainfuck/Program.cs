@@ -47,10 +47,10 @@ class Program
             switch (code[codeindex]) //operuje na memory na podstawie znakow z kodu na wejsciu
             {
                 case '>': //przesowa wskaznik na tasmie w prawo
-                    pointer = pointer + 1;
+                    pointer = (pointer + 1) % memorySize;
                     break;
                 case '<': //przesowa wskaznik na tasmie w lewo
-                    pointer = pointer - 1;
+                    pointer = (pointer + memorySize - 1) % memorySize;
                     break;
                 case '+': //zwieksza wartosc dla komorki wskazanej przez wskaznik
                     memory[pointer]++;
